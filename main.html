@@ -3,115 +3,176 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>маленький сюрприз</title>
+  <title>Твой маленький сюрприз</title>
   <style>
     * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
     body {
-      margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #f0f2f5;
+      background: linear-gradient(135deg, #ffe6cc, #fff8f0);
       color: #333;
       overflow-x: hidden;
-      padding: 0;
+      height: 100vh;
+      position: relative;
     }
 
     .container {
       max-width: 900px;
-      margin: auto;
+      margin: 100px auto;
       padding: 50px;
-      background: white;
-      border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      opacity: 0;
-      transform: translateY(50px);
-      animation: fadeIn 1s forwards 0.5s;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(10px);
+      animation: slideUp 1.2s ease-out forwards;
     }
 
     h1 {
       font-size: 3em;
-      color: #d99e6a;
+      color: #ff8c42;
       text-align: center;
-      margin-bottom: 1.5em;
+      margin-bottom: 1em;
+      text-shadow: 0 0 10px #ffd6a0;
+      animation: neonGlow 2s ease-in-out infinite alternate;
     }
 
-    h2 {
-      color: #444;
-      font-size: 1.5em;
-      text-align: center;
-      margin-bottom: 1.5em;
+    h2, p, .code, .button {
       opacity: 0;
-      animation: fadeIn 1s forwards 1s;
+      transform: translateY(20px);
+      animation: fadeInUp 1s forwards;
     }
+
+    h2:nth-of-type(1) { animation-delay: 1s; }
+    p:nth-of-type(1) { animation-delay: 2s; }
+    p:nth-of-type(2) { animation-delay: 3s; }
+    h2:nth-of-type(2) { animation-delay: 4s; }
+    p:nth-of-type(3) { animation-delay: 5s; }
+    .code { animation-delay: 6s; }
+    .button { animation-delay: 7s; }
 
     p {
-      font-size: 1.2em;
+      font-size: 1.3em;
       line-height: 1.6;
-      margin-bottom: 1.5em;
-      opacity: 0;
-      animation: fadeIn 1s forwards 1.5s;
-    }
-
-    .highlight {
-      color: #d99e6a;
-      font-weight: bold;
+      margin-bottom: 1.2em;
     }
 
     .code {
-      font-size: 1.3em;
-      font-weight: bold;
-      background: #f1f1f1;
-      padding: 8px;
-      border-radius: 5px;
-      display: inline-block;
-      margin-top: 10px;
-      color: #c4844f;
+      display: block;
+      text-align: center;
+      font-size: 1.5em;
+      background: #ffe0c3;
+      color: #b85e00;
+      padding: 15px 20px;
+      border-radius: 10px;
+      margin: 20px auto;
+      width: fit-content;
+      box-shadow: 0 0 15px rgba(255, 150, 50, 0.5);
     }
 
     .button {
-      display: inline-block;
-      margin-top: 30px;
-      padding: 15px 30px;
-      background-color: #d99e6a;
+      display: block;
+      text-align: center;
+      margin: 40px auto 0;
+      padding: 15px 40px;
+      font-size: 1.2em;
+      background: linear-gradient(135deg, #ff8c42, #ff5e62);
       color: white;
       text-decoration: none;
       border-radius: 50px;
-      font-size: 1.1em;
-      text-align: center;
-      transition: background-color 0.3s ease;
-      opacity: 0;
-      animation: fadeIn 1s forwards 2s;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 8px 20px rgba(255, 100, 0, 0.3);
     }
 
     .button:hover {
-      background-color: #c4844f;
+      transform: translateY(-5px);
+      box-shadow: 0 12px 30px rgba(255, 100, 0, 0.5);
     }
 
     footer {
-      margin-top: 50px;
+      text-align: center;
+      margin-top: 60px;
       font-size: 0.9em;
       color: #aaa;
-      text-align: center;
     }
 
-    @keyframes fadeIn {
+    /* Анимации */
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
       to {
         opacity: 1;
         transform: translateY(0);
       }
     }
 
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes neonGlow {
+      from {
+        text-shadow: 0 0 10px #ffd6a0, 0 0 20px #ffc27c;
+      }
+      to {
+        text-shadow: 0 0 20px #ffaa55, 0 0 30px #ff8c42;
+      }
+    }
+
+    /* Анимированные частицы */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .particle {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: rgba(255, 150, 0, 0.4);
+      border-radius: 50%;
+      animation: float 10s infinite ease-in-out;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 0.5;
+      }
+      50% {
+        transform: translateY(-800px) scale(1.5);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(0) scale(1);
+        opacity: 0;
+      }
+    }
+
     @media (max-width: 600px) {
       h1 {
-        font-size: 2.2em;
+        font-size: 2em;
       }
-      h2 {
+
+      .code {
         font-size: 1.2em;
       }
-      p {
-        font-size: 1em;
+
+      .button {
+        padding: 12px 25px;
       }
     }
   </style>
@@ -119,30 +180,47 @@
 <body>
   <audio autoplay loop>
     <source src="https://www.bensound.com/bensound-music/bensound-littleidea.mp3" type="audio/mp3">
-    ваш браузер не поддерживает элемент audio.
+    Ваш браузер не поддерживает элемент audio.
   </audio>
 
+  <!-- Частицы -->
+  <div class="particles">
+    <!-- JavaScript добавит частицы -->
+  </div>
+
   <div class="container">
-    <h1>лишь маленький сюрприз...</h1>
+    <h1>Твой маленький сюрприз...</h1>
 
-    <h2>ты так много заботишься о других...</h2>
+    <h2>Ты так много заботишься о других...</h2>
 
-    <p>я решил, что тебе точно нужно что-то, что сделает твои будни немножко ярче и теплее. Так что я заказал для тебя нечто особенное. 🌟</p>
+    <p>Я решил, что тебе точно нужно что-то, что сделает твои будни немножко ярче и теплее. Так что я заказал для тебя нечто особенное.</p>
 
-    <p>но не спеши! тебе нужно пройти небольшой путь, чтобы найти его. и твой подарок ждёт тебя не где-то, а рядом с твоей клиникой...</p>
+    <p>Но не спеши! Тебе нужно пройти небольшой путь, чтобы найти его. И твой подарок ждёт тебя не где-то, а рядом с твоей клиникой...</p>
 
-    <h2>что тебе нужно сделать:</h2>
+    <h2>Что тебе нужно сделать:</h2>
 
-    <p>загляни в пункт выдачи Boxberry. он в соседнем доме. и там, среди всего прочего, тебя ждёт кое-что... в подарок для тебя.</p>
+    <p>Загляни в пункт выдачи Boxberry. Он в соседнем доме. И там, среди всего прочего, тебя ждёт кое-что... в подарок для тебя.</p>
 
     <h2>Твой код для получения:</h2>
     <p class="code">[КОД]</p>
 
     <a href="#" class="button">Забрать свой сюрприз</a>
 
-    <footer>
-      сделано с вниманием и заботой.
-    </footer>
+    <footer>Сделано с вниманием и заботой.</footer>
   </div>
+
+  <script>
+    // Добавление частиц
+    const particlesContainer = document.querySelector('.particles');
+    for (let i = 0; i < 60; i++) {
+      const p = document.createElement('div');
+      p.classList.add('particle');
+      p.style.left = Math.random() * 100 + 'vw';
+      p.style.top = Math.random() * 100 + 'vh';
+      p.style.animationDuration = (8 + Math.random() * 5) + 's';
+      p.style.opacity = Math.random();
+      particlesContainer.appendChild(p);
+    }
+  </script>
 </body>
 </html>
