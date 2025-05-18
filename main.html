@@ -14,62 +14,104 @@
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: linear-gradient(135deg, #ffe6cc, #fff8f0);
-      color: #333;
       overflow: hidden;
-      position: relative;
-      min-height: 100vh;
+      height: 100vh;
+    }
+
+    #startScreen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #fff3e0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      z-index: 9999;
+      text-align: center;
+    }
+
+    #startScreen h1 {
+      font-size: 2em;
+      color: #ff8c42;
+      margin-bottom: 20px;
+    }
+
+    #startScreen button {
+      padding: 15px 30px;
+      font-size: 1.2em;
+      background: #ff8c42;
+      color: white;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    #startScreen button:hover {
+      transform: scale(1.05);
     }
 
     .container {
-      max-width: 900px;
+      max-width: 800px;
       margin: 100px auto;
-      padding: 50px;
+      padding: 40px;
       background: rgba(255, 255, 255, 0.95);
       border-radius: 20px;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-      backdrop-filter: blur(10px);
-      animation: slideUp 1.2s ease-out forwards;
-      perspective: 1000px;
-      transform-style: preserve-3d;
-      transition: transform 0.5s ease;
-    }
-
-    .container:hover {
-      transform: rotateY(1deg) rotateX(1deg);
+      animation: fadeIn 1s ease-in;
+      display: none;
     }
 
     h1 {
-      font-size: 3em;
-      color: #ff8c42;
       text-align: center;
-      margin-bottom: 1em;
-      text-shadow: 0 0 10px #ffd6a0;
-      animation: neonGlow 2s ease-in-out infinite alternate;
+      color: #ff8c42;
+      font-size: 2.5em;
+      margin-bottom: 20px;
     }
 
-    h2, p, .code, .button {
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeInUp 1s forwards;
+    p, h2 {
+      font-size: 1.2em;
+      text-align: center;
+      margin: 15px 0;
     }
 
-    h2:nth-of-type(1) { animation-delay: 1s; }
-    p:nth-of-type(1) { animation-delay: 2s; }
-    p:nth-of-type(2) { animation-delay: 3s; }
-    h2:nth-of-type(2) { animation-delay: 4s; }
-    p:nth-of-type(3) { animation-delay: 5s; }
-    .code { animation-delay: 6s; }
-    .button { animation-delay: 7s; }
+    .gift-box {
+      width: 150px;
+      height: 150px;
+      background: #ff8c42;
+      margin: 40px auto;
+      position: relative;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: transform 0.3s;
+      box-shadow: 0 8px 20px rgba(255, 100, 0, 0.3);
+    }
 
-    p {
-      font-size: 1.3em;
-      line-height: 1.6;
-      margin-bottom: 1.2em;
+    .gift-box:hover {
+      transform: scale(1.05);
+    }
+
+    .lid {
+      position: absolute;
+      width: 100%;
+      height: 40%;
+      background: #e66a00;
+      top: 0;
+      left: 0;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+      transform-origin: top center;
+      transition: transform 0.5s ease;
+      z-index: 2;
     }
 
     .code {
-      display: block;
-      text-align: center;
+      opacity: 0;
+      transform: scale(0.9);
+      transition: all 0.6s ease;
       font-size: 1.5em;
       background: #ffe0c3;
       color: #b85e00;
@@ -80,70 +122,22 @@
       box-shadow: 0 0 15px rgba(255, 150, 50, 0.5);
     }
 
-    .button {
-      display: block;
-      text-align: center;
-      margin: 40px auto 0;
-      padding: 15px 40px;
-      font-size: 1.2em;
-      background: linear-gradient(135deg, #ff8c42, #ff5e62);
-      color: white;
-      text-decoration: none;
-      border-radius: 50px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      box-shadow: 0 8px 20px rgba(255, 100, 0, 0.3);
-      position: relative;
-      z-index: 10;
+    .gift-box.open .lid {
+      transform: rotateX(160deg);
     }
 
-    .button:hover {
-      transform: translateY(-5px) scale(1.05);
-      box-shadow: 0 12px 30px rgba(255, 100, 0, 0.5);
+    .gift-box.open + .code {
+      opacity: 1;
+      transform: scale(1);
     }
 
     footer {
+      margin-top: 40px;
       text-align: center;
-      margin-top: 60px;
-      font-size: 0.9em;
-      color: #aaa;
+      color: #888;
     }
 
-    /* Частицы */
-    .particles {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .particle {
-      position: absolute;
-      width: 8px;
-      height: 8px;
-      background: rgba(255, 150, 0, 0.4);
-      border-radius: 50%;
-      animation: float 10s infinite ease-in-out;
-    }
-
-    @keyframes float {
-      0% {
-        transform: translateY(0) scale(1);
-        opacity: 0.5;
-      }
-      50% {
-        transform: translateY(-800px) scale(1.5);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(0) scale(1);
-        opacity: 0;
-      }
-    }
-
-    @keyframes slideUp {
+    @keyframes fadeIn {
       from {
         opacity: 0;
         transform: translateY(50px);
@@ -153,119 +147,56 @@
         transform: translateY(0);
       }
     }
-
-    @keyframes fadeInUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes neonGlow {
-      from {
-        text-shadow: 0 0 10px #ffd6a0, 0 0 20px #ffc27c;
-      }
-      to {
-        text-shadow: 0 0 20px #ffaa55, 0 0 30px #ff8c42;
-      }
-    }
-
-    /* Фейерверки */
-    .firework {
-      position: absolute;
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background-color: gold;
-      animation: explode 700ms ease-out forwards;
-      pointer-events: none;
-      z-index: 100;
-    }
-
-    @keyframes explode {
-      0% {
-        opacity: 1;
-        transform: scale(1);
-      }
-      100% {
-        opacity: 0;
-        transform: scale(5);
-      }
-    }
-
-    @media (max-width: 600px) {
-      h1 {
-        font-size: 2em;
-      }
-
-      .code {
-        font-size: 1.2em;
-      }
-
-      .button {
-        padding: 12px 25px;
-      }
-    }
   </style>
 </head>
 <body>
-  <audio autoplay loop>
+
+  <!-- ЭКРАН СТАРТА -->
+  <div id="startScreen">
+    <h1>Нажми, чтобы начать магию</h1>
+    <button onclick="startExperience()">Вперёд!</button>
+  </div>
+
+  <!-- АУДИО -->
+  <audio id="bgMusic" loop>
     <source src="https://www.bensound.com/bensound-music/bensound-littleidea.mp3" type="audio/mp3">
-    Ваш браузер не поддерживает элемент audio.
   </audio>
 
-  <!-- Частицы -->
-  <div class="particles"></div>
-
-  <div class="container" id="surpriseBox">
+  <!-- ОСНОВНОЙ КОНТЕНТ -->
+  <div class="container" id="mainContent">
     <h1>Твой маленький сюрприз...</h1>
 
     <h2>Ты так много заботишься о других...</h2>
 
-    <p>Я решил, что тебе точно нужно что-то, что сделает твои будни немножко ярче и теплее. Так что я заказал для тебя нечто особенное.</p>
+    <p>Я решил, что тебе точно нужно что-то, что сделает твои будни немножко ярче и теплее.</p>
+    <p>Так что я заказал для тебя нечто особенное. Но тебе нужно будет найти это!</p>
 
-    <p>Но не спеши! Тебе нужно пройти небольшой путь, чтобы найти его. И твой подарок ждёт тебя не где-то, а рядом с твоей клиникой...</p>
+    <h2>Где это?</h2>
+    <p>Загляни в пункт выдачи Boxberry. Он в соседнем доме у клиники. Тебя там кое-что ждёт...</p>
 
-    <h2>Что тебе нужно сделать:</h2>
+    <!-- КОРОБКА -->
+    <div class="gift-box" onclick="openGift(this)">
+      <div class="lid"></div>
+    </div>
 
-    <p>Загляни в пункт выдачи Boxberry. Он в соседнем доме. И там, среди всего прочего, тебя ждёт кое-что... в подарок для тебя.</p>
-
-    <h2>Твой код для получения:</h2>
-    <p class="code">[КОД]</p>
-
-    <a href="#" class="button" onclick="triggerFireworks(event)">Забрать свой сюрприз</a>
+    <!-- КОД -->
+    <div class="code" id="secretCode">[КОД]</div>
 
     <footer>Сделано с вниманием и заботой.</footer>
   </div>
 
   <script>
-    // Падающие частицы
-    const particlesContainer = document.querySelector('.particles');
-    for (let i = 0; i < 60; i++) {
-      const p = document.createElement('div');
-      p.classList.add('particle');
-      p.style.left = Math.random() * 100 + 'vw';
-      p.style.top = Math.random() * 100 + 'vh';
-      p.style.animationDuration = (8 + Math.random() * 5) + 's';
-      p.style.opacity = Math.random();
-      particlesContainer.appendChild(p);
+    function startExperience() {
+      document.getElementById("startScreen").style.display = "none";
+      const music = document.getElementById("bgMusic");
+      music.play();
+      document.getElementById("mainContent").style.display = "block";
     }
 
-    // Фейерверки по клику
-    function triggerFireworks(e) {
-      for (let i = 0; i < 20; i++) {
-        const firework = document.createElement('div');
-        firework.classList.add('firework');
-        document.body.appendChild(firework);
-        firework.style.left = (e.clientX + (Math.random() * 100 - 50)) + 'px';
-        firework.style.top = (e.clientY + (Math.random() * 100 - 50)) + 'px';
-        firework.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 60%)`;
-
-        setTimeout(() => {
-          firework.remove();
-        }, 700);
-      }
+    function openGift(box) {
+      box.classList.add("open");
     }
   </script>
+
 </body>
 </html>
