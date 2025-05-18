@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>маленький сюрприз</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f0f2f5;
+      color: #333;
+      overflow-x: hidden;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 50px;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      opacity: 0;
+      transform: translateY(50px);
+      animation: fadeIn 1s forwards 0.5s;
+    }
+
+    h1 {
+      font-size: 3em;
+      color: #d99e6a;
+      text-align: center;
+      margin-bottom: 1.5em;
+    }
+
+    h2 {
+      color: #444;
+      font-size: 1.5em;
+      text-align: center;
+      margin-bottom: 1.5em;
+      opacity: 0;
+      animation: fadeIn 1s forwards 1s;
+    }
+
+    p {
+      font-size: 1.2em;
+      line-height: 1.6;
+      margin-bottom: 1.5em;
+      opacity: 0;
+      animation: fadeIn 1s forwards 1.5s;
+    }
+
+    .highlight {
+      color: #d99e6a;
+      font-weight: bold;
+    }
+
+    .code {
+      font-size: 1.3em;
+      font-weight: bold;
+      background: #f1f1f1;
+      padding: 8px;
+      border-radius: 5px;
+      display: inline-block;
+      margin-top: 10px;
+      color: #c4844f;
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 15px 30px;
+      background-color: #d99e6a;
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-size: 1.1em;
+      text-align: center;
+      transition: background-color 0.3s ease;
+      opacity: 0;
+      animation: fadeIn 1s forwards 2s;
+    }
+
+    .button:hover {
+      background-color: #c4844f;
+    }
+
+    footer {
+      margin-top: 50px;
+      font-size: 0.9em;
+      color: #aaa;
+      text-align: center;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2.2em;
+      }
+      h2 {
+        font-size: 1.2em;
+      }
+      p {
+        font-size: 1em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <audio autoplay loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-littleidea.mp3" type="audio/mp3">
+    ваш браузер не поддерживает элемент audio.
+  </audio>
+
+  <div class="container">
+    <h1>лишь маленький сюрприз...</h1>
+
+    <h2>ты так много заботишься о других...</h2>
+
+    <p>я решил, что тебе точно нужно что-то, что сделает твои будни немножко ярче и теплее. Так что я заказал для тебя нечто особенное. 🌟</p>
+
+    <p>но не спеши! тебе нужно пройти небольшой путь, чтобы найти его. и твой подарок ждёт тебя не где-то, а рядом с твоей клиникой...</p>
+
+    <h2>что тебе нужно сделать:</h2>
+
+    <p>загляни в пункт выдачи Boxberry. он в соседнем доме. и там, среди всего прочего, тебя ждёт кое-что... в подарок для тебя.</p>
+
+    <h2>Твой код для получения:</h2>
+    <p class="code">[КОД]</p>
+
+    <a href="#" class="button">Забрать свой сюрприз</a>
+
+    <footer>
+      сделано с вниманием и заботой.
+    </footer>
+  </div>
+</body>
+</html>
