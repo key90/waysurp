@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Твой маленький сюрприз</title>
   <style>
     * {
@@ -15,20 +15,27 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: linear-gradient(135deg, #ffe6cc, #fff8f0);
       color: #333;
-      overflow-x: hidden;
-      height: 100vh;
+      overflow: hidden;
       position: relative;
+      min-height: 100vh;
     }
 
     .container {
       max-width: 900px;
       margin: 100px auto;
       padding: 50px;
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.95);
       border-radius: 20px;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
       backdrop-filter: blur(10px);
       animation: slideUp 1.2s ease-out forwards;
+      perspective: 1000px;
+      transform-style: preserve-3d;
+      transition: transform 0.5s ease;
+    }
+
+    .container:hover {
+      transform: rotateY(1deg) rotateX(1deg);
     }
 
     h1 {
@@ -85,10 +92,12 @@
       border-radius: 50px;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       box-shadow: 0 8px 20px rgba(255, 100, 0, 0.3);
+      position: relative;
+      z-index: 10;
     }
 
     .button:hover {
-      transform: translateY(-5px);
+      transform: translateY(-5px) scale(1.05);
       box-shadow: 0 12px 30px rgba(255, 100, 0, 0.5);
     }
 
@@ -99,35 +108,7 @@
       color: #aaa;
     }
 
-    /* Анимации */
-    @keyframes slideUp {
-      from {
-        opacity: 0;
-        transform: translateY(50px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes fadeInUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes neonGlow {
-      from {
-        text-shadow: 0 0 10px #ffd6a0, 0 0 20px #ffc27c;
-      }
-      to {
-        text-shadow: 0 0 20px #ffaa55, 0 0 30px #ff8c42;
-      }
-    }
-
-    /* Анимированные частицы */
+    /* Частицы */
     .particles {
       position: fixed;
       top: 0;
@@ -162,6 +143,56 @@
       }
     }
 
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes neonGlow {
+      from {
+        text-shadow: 0 0 10px #ffd6a0, 0 0 20px #ffc27c;
+      }
+      to {
+        text-shadow: 0 0 20px #ffaa55, 0 0 30px #ff8c42;
+      }
+    }
+
+    /* Фейерверки */
+    .firework {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: gold;
+      animation: explode 700ms ease-out forwards;
+      pointer-events: none;
+      z-index: 100;
+    }
+
+    @keyframes explode {
+      0% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(5);
+      }
+    }
+
     @media (max-width: 600px) {
       h1 {
         font-size: 2em;
@@ -184,11 +215,9 @@
   </audio>
 
   <!-- Частицы -->
-  <div class="particles">
-    <!-- JavaScript добавит частицы -->
-  </div>
+  <div class="particles"></div>
 
-  <div class="container">
+  <div class="container" id="surpriseBox">
     <h1>Твой маленький сюрприз...</h1>
 
     <h2>Ты так много заботишься о других...</h2>
@@ -204,13 +233,13 @@
     <h2>Твой код для получения:</h2>
     <p class="code">[КОД]</p>
 
-    <a href="#" class="button">Забрать свой сюрприз</a>
+    <a href="#" class="button" onclick="triggerFireworks(event)">Забрать свой сюрприз</a>
 
     <footer>Сделано с вниманием и заботой.</footer>
   </div>
 
   <script>
-    // Добавление частиц
+    // Падающие частицы
     const particlesContainer = document.querySelector('.particles');
     for (let i = 0; i < 60; i++) {
       const p = document.createElement('div');
@@ -220,6 +249,22 @@
       p.style.animationDuration = (8 + Math.random() * 5) + 's';
       p.style.opacity = Math.random();
       particlesContainer.appendChild(p);
+    }
+
+    // Фейерверки по клику
+    function triggerFireworks(e) {
+      for (let i = 0; i < 20; i++) {
+        const firework = document.createElement('div');
+        firework.classList.add('firework');
+        document.body.appendChild(firework);
+        firework.style.left = (e.clientX + (Math.random() * 100 - 50)) + 'px';
+        firework.style.top = (e.clientY + (Math.random() * 100 - 50)) + 'px';
+        firework.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 60%)`;
+
+        setTimeout(() => {
+          firework.remove();
+        }, 700);
+      }
     }
   </script>
 </body>
