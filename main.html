@@ -123,8 +123,8 @@
       left: 0;
       border-top-left-radius: 15px;
       border-top-right-radius: 15px;
-      transform-origin: top center;
-      transition: transform 0.6s ease;
+      transform-origin: bottom center; /* Устанавливаем центр для вращения */
+      transition: transform 0.6s ease; /* Плавное движение вверх */
       z-index: 2;
     }
 
@@ -151,7 +151,7 @@
     }
 
     .gift-box.open .lid {
-      transform: translateY(-50%);
+      transform: translateY(-100%); /* Крышка поднимется вверх */
     }
 
     .gift-box.open .box-content {
