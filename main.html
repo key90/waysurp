@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>маленький сюрприз</title>
+  <!-- Подключение шрифта Poppins -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     * {
@@ -30,18 +31,17 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(255, 243, 224, 0.95);
+      background: #fff3e0;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-direction: column;
       z-index: 9999;
       text-align: center;
-      transition: opacity 0.8s;
     }
 
     #startScreen h1 {
-      font-size: 1.8em;
+      font-size: 1.6em;
       color: #ff8c42;
       margin-bottom: 20px;
       font-weight: 600;
@@ -49,13 +49,14 @@
 
     #startScreen button {
       padding: 12px 25px;
-      font-size: 1.2em;
+      font-size: 1.1em;
       background: #ff8c42;
       color: white;
       border: none;
       border-radius: 50px;
       cursor: pointer;
-      transition: transform 0.3s;
+      transition: transform 0.3s ease;
+      font-weight: 500;
     }
 
     #startScreen button:hover {
@@ -63,42 +64,70 @@
     }
 
     .container {
-      display: none;
-      text-align: center;
-      max-width: 600px;
-      padding: 20px;
+      width: 90%;
+      max-width: 800px;
+      height: 90%;
+      padding: 30px;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
       animation: fadeIn 1s ease-in;
+      text-align: center;
+      display: none;
+      position: relative;
+      perspective: 1000px;
+    }
+
+    h1 {
+      color: #ff8c42;
+      font-size: 1.8em;
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+
+    p, h2 {
+      font-size: 1.1em;
+      margin: 12px 0;
+      font-weight: 400;
+      color: #555;
     }
 
     .gift-box {
-      width: 180px;
-      height: 180px;
-      background: linear-gradient(135deg, #ff8c42, #e66a00);
-      margin: 20px auto;
+      width: 200px;
+      height: 200px;
+      background: #ff8c42;
+      margin: 30px auto;
       position: relative;
       border-radius: 15px;
       cursor: pointer;
-      transition: transform 0.4s, box-shadow 0.3s;
-      box-shadow: 0 12px 30px rgba(255, 140, 66, 0.5);
+      transition: transform 0.4s ease, box-shadow 0.3s ease;
+      box-shadow: 0 8px 30px rgba(255, 100, 0, 0.4);
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      flex-direction: column;
+      transform-style: preserve-3d;
     }
 
     .gift-box:hover {
       transform: scale(1.05);
+      box-shadow: 0 12px 40px rgba(255, 100, 0, 0.5);
     }
 
-    .gift-box .lid {
+    .lid {
       position: absolute;
       width: 100%;
-      height: 40%;
+      height: 50%;
       background: #e66a00;
       top: 0;
+      left: 0;
       border-top-left-radius: 15px;
       border-top-right-radius: 15px;
-      transition: transform 0.6s;
       transform-origin: top center;
+      transition: transform 0.8s ease;
+      z-index: 2;
+      backface-visibility: hidden;
     }
 
     .gift-box.open .lid {
@@ -107,32 +136,77 @@
 
     .box-content {
       position: absolute;
+      color: white;
+      font-size: 1.3em;
+      text-align: center;
+      z-index: 1;
       opacity: 0;
-      transition: opacity 0.5s, transform 0.5s;
-      transform: translateY(-10px);
-      color: #fff;
-      font-size: 1.4em;
+      transform: scale(0.9);
+      transition: all 0.6s ease;
     }
 
     .gift-box.open .box-content {
       opacity: 1;
-      transform: translateY(0);
+      transform: scale(1) translateY(-10px);
+    }
+
+    .code {
+      background: #ffe0c3;
+      color: #b85e00;
+      padding: 15px 20px;
+      border-radius: 10px;
+      width: fit-content;
+      margin: 0 auto;
+      box-shadow: 0 0 15px rgba(255, 150, 50, 0.5);
+      font-size: 1.5em;
     }
 
     footer {
-      margin-top: 15px;
+      margin-top: 20px;
       color: #888;
-      font-size: 0.85em;
+      font-size: 0.8em;
     }
 
     @keyframes fadeIn {
       from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(50px);
       }
       to {
         opacity: 1;
         transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 600px) {
+      body {
+        font-size: 14px;
+        justify-content: flex-start;
+      }
+
+      .container {
+        padding: 20px;
+      }
+
+      .gift-box {
+        width: 150px;
+        height: 150px;
+      }
+
+      .gift-box .lid {
+        height: 40%;
+      }
+
+      h1 {
+        font-size: 1.5em;
+      }
+
+      p, h2 {
+        font-size: 1em;
+      }
+
+      footer {
+        font-size: 0.8em;
       }
     }
   </style>
@@ -153,7 +227,12 @@
   <!-- ОСНОВНОЙ КОНТЕНТ -->
   <div class="container" id="mainContent">
     <h2>ты так много заботишься о других</h2>
+
     <p>что я решил: тебе точно нужно что-то, что сделает твои будни немножко ярче и теплее</p>
+    <p>так что заказал для тебя нечто особенное</p>
+    </p>но тебе нужно будет найти это!</p>
+
+    <h2>тебе, наверно, интересно, где?</h2>
     <p>загляни в пункт выдачи boxberry. он в соседнем доме у клиники - тебя там кое-что ждёт</p>
 
     <!-- КОРОБКА -->
@@ -169,17 +248,16 @@
 
   <script>
     function startExperience() {
-      document.getElementById("startScreen").style.opacity = "0";
-      setTimeout(() => {
-        document.getElementById("startScreen").style.display = "none";
-        document.getElementById("mainContent").style.display = "block";
-        document.getElementById("bgMusic").play();
-      }, 800);
+      document.getElementById("startScreen").style.display = "none";
+      const music = document.getElementById("bgMusic");
+      music.play();
+      document.getElementById("mainContent").style.display = "block";
     }
 
     function openGift(box) {
       box.classList.add("open");
     }
   </script>
+
 </body>
 </html>
