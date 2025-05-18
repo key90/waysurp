@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>маленький сюрприз</title>
-  <!-- Подключение шрифта Poppins -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     * {
@@ -15,7 +14,7 @@
 
     body {
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #ffe6cc, #fff8f0);
+      background: linear-gradient(135deg, #ffd9b3, #fffae6);
       overflow: hidden;
       height: 100vh;
       display: flex;
@@ -31,13 +30,14 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: #fff3e0;
+      background: rgba(255, 243, 224, 0.95);
       display: flex;
       align-items: center;
       justify-content: center;
       flex-direction: column;
       z-index: 9999;
       text-align: center;
+      transition: opacity 1s;
     }
 
     #startScreen h1 {
@@ -55,79 +55,54 @@
       border: none;
       border-radius: 50px;
       cursor: pointer;
-      transition: transform 0.3s ease;
-      font-weight: 500;
+      transition: transform 0.3s, box-shadow 0.3s;
     }
 
     #startScreen button:hover {
       transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(255, 140, 66, 0.6);
     }
 
     .container {
-      width: 90%;
-      max-width: 800px;
-      height: 90%;
-      padding: 30px;
-      background: rgba(255, 255, 255, 0.95);
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-      animation: fadeIn 1s ease-in;
-      text-align: center;
       display: none;
+      text-align: center;
+      max-width: 600px;
+      animation: fadeIn 1s ease-in;
       position: relative;
-      perspective: 1000px;
     }
 
-    h1 {
-      color: #ff8c42;
-      font-size: 1.8em;
-      margin-bottom: 15px;
-      font-weight: 600;
-    }
-
-    p, h2 {
-      font-size: 1.1em;
-      margin: 12px 0;
-      font-weight: 400;
-      color: #555;
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1s, transform 1s;
     }
 
     .gift-box {
       width: 200px;
       height: 200px;
       background: #ff8c42;
-      margin: 30px auto;
       position: relative;
+      margin: 30px auto;
       border-radius: 15px;
       cursor: pointer;
-      transition: transform 0.4s ease, box-shadow 0.3s ease;
-      box-shadow: 0 8px 30px rgba(255, 100, 0, 0.4);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-      flex-direction: column;
-      transform-style: preserve-3d;
+      transition: transform 0.4s, box-shadow 0.3s;
+      box-shadow: 0 12px 40px rgba(255, 140, 66, 0.5);
     }
 
     .gift-box:hover {
       transform: scale(1.05);
-      box-shadow: 0 12px 40px rgba(255, 100, 0, 0.5);
     }
 
-    .lid {
+    .gift-box .lid {
       position: absolute;
       width: 100%;
-      height: 50%;
+      height: 50px;
       background: #e66a00;
       top: 0;
-      left: 0;
       border-top-left-radius: 15px;
       border-top-right-radius: 15px;
+      transition: transform 0.8s;
       transform-origin: top center;
-      transition: transform 0.8s ease;
-      z-index: 2;
-      backface-visibility: hidden;
     }
 
     .gift-box.open .lid {
@@ -136,29 +111,16 @@
 
     .box-content {
       position: absolute;
-      color: white;
-      font-size: 1.3em;
-      text-align: center;
-      z-index: 1;
       opacity: 0;
-      transform: scale(0.9);
-      transition: all 0.6s ease;
+      transition: opacity 0.5s, transform 0.5s;
+      transform: translateY(-20px);
+      color: #fff;
+      font-size: 1.5em;
     }
 
     .gift-box.open .box-content {
       opacity: 1;
-      transform: scale(1) translateY(-10px);
-    }
-
-    .code {
-      background: #ffe0c3;
-      color: #b85e00;
-      padding: 15px 20px;
-      border-radius: 10px;
-      width: fit-content;
-      margin: 0 auto;
-      box-shadow: 0 0 15px rgba(255, 150, 50, 0.5);
-      font-size: 1.5em;
+      transform: translateY(0);
     }
 
     footer {
@@ -170,7 +132,7 @@
     @keyframes fadeIn {
       from {
         opacity: 0;
-        transform: translateY(50px);
+        transform: translateY(20px);
       }
       to {
         opacity: 1;
@@ -178,35 +140,25 @@
       }
     }
 
-    @media (max-width: 600px) {
-      body {
-        font-size: 14px;
-        justify-content: flex-start;
-      }
+    /* Эффект блесток */
+    .sparkle {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: #ffd700;
+      border-radius: 50%;
+      animation: sparkle 1.5s ease-out forwards;
+      pointer-events: none;
+    }
 
-      .container {
-        padding: 20px;
+    @keyframes sparkle {
+      0% {
+        opacity: 1;
+        transform: scale(1);
       }
-
-      .gift-box {
-        width: 150px;
-        height: 150px;
-      }
-
-      .gift-box .lid {
-        height: 40%;
-      }
-
-      h1 {
-        font-size: 1.5em;
-      }
-
-      p, h2 {
-        font-size: 1em;
-      }
-
-      footer {
-        font-size: 0.8em;
+      100% {
+        opacity: 0;
+        transform: scale(0);
       }
     }
   </style>
@@ -219,21 +171,11 @@
     <button onclick="startExperience()">вперёд!</button>
   </div>
 
-  <!-- АУДИО -->
-  <audio id="bgMusic" loop>
-    <source src="https://www.bensound.com/bensound-music/bensound-littleidea.mp3" type="audio/mp3">
-  </audio>
-
   <!-- ОСНОВНОЙ КОНТЕНТ -->
   <div class="container" id="mainContent">
-    <h2>ты так много заботишься о других</h2>
-
-    <p>что я решил: тебе точно нужно что-то, что сделает твои будни немножко ярче и теплее</p>
-    <p>так что заказал для тебя нечто особенное</p>
-    </p>но тебе нужно будет найти это!</p>
-
-    <h2>тебе, наверно, интересно, где?</h2>
-    <p>загляни в пункт выдачи boxberry. он в соседнем доме у клиники - тебя там кое-что ждёт</p>
+    <h2 class="fade-in">ты так много заботишься о других</h2>
+    <p class="fade-in">что я решил: тебе точно нужно что-то, что сделает твои будни немножко ярче и теплее</p>
+    <h2 class="fade-in">загляни в пункт выдачи boxberry. он в соседнем доме у клиники - тебя там кое-что ждёт</h2>
 
     <!-- КОРОБКА -->
     <div class="gift-box" onclick="openGift(this)">
@@ -248,16 +190,33 @@
 
   <script>
     function startExperience() {
-      document.getElementById("startScreen").style.display = "none";
-      const music = document.getElementById("bgMusic");
-      music.play();
-      document.getElementById("mainContent").style.display = "block";
+      const startScreen = document.getElementById("startScreen");
+      startScreen.style.opacity = "0";
+      setTimeout(() => {
+        startScreen.style.display = "none";
+        document.getElementById("mainContent").style.display = "block";
+        document.querySelectorAll(".fade-in").forEach(el => {
+          el.style.opacity = "1";
+          el.style.transform = "translateY(0)";
+        });
+      }, 1000);
     }
 
     function openGift(box) {
       box.classList.add("open");
+      for (let i = 0; i < 50; i++) {
+        createSparkle(box);
+      }
+    }
+
+    function createSparkle(box) {
+      const sparkle = document.createElement("div");
+      sparkle.className = "sparkle";
+      sparkle.style.left = `${Math.random() * box.offsetWidth - 20}px`;
+      sparkle.style.top = `${Math.random() * box.offsetHeight - 20}px`;
+      box.appendChild(sparkle);
+      setTimeout(() => sparkle.remove(), 1500);
     }
   </script>
-
 </body>
 </html>
