@@ -14,7 +14,7 @@
 
     body {
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #ffd9b3, #fffae6);
+      background: linear-gradient(135deg, #ffe6cc, #fff8f0);
       overflow: hidden;
       height: 100vh;
       display: flex;
@@ -37,11 +37,11 @@
       flex-direction: column;
       z-index: 9999;
       text-align: center;
-      transition: opacity 1s;
+      transition: opacity 0.8s;
     }
 
     #startScreen h1 {
-      font-size: 1.6em;
+      font-size: 1.8em;
       color: #ff8c42;
       margin-bottom: 20px;
       font-weight: 600;
@@ -49,44 +49,40 @@
 
     #startScreen button {
       padding: 12px 25px;
-      font-size: 1.1em;
+      font-size: 1.2em;
       background: #ff8c42;
       color: white;
       border: none;
       border-radius: 50px;
       cursor: pointer;
-      transition: transform 0.3s, box-shadow 0.3s;
+      transition: transform 0.3s;
     }
 
     #startScreen button:hover {
       transform: scale(1.05);
-      box-shadow: 0 0 15px rgba(255, 140, 66, 0.6);
     }
 
     .container {
       display: none;
       text-align: center;
       max-width: 600px;
+      padding: 20px;
       animation: fadeIn 1s ease-in;
-      position: relative;
-    }
-
-    .fade-in {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 1s, transform 1s;
     }
 
     .gift-box {
-      width: 200px;
-      height: 200px;
-      background: #ff8c42;
+      width: 180px;
+      height: 180px;
+      background: linear-gradient(135deg, #ff8c42, #e66a00);
+      margin: 20px auto;
       position: relative;
-      margin: 30px auto;
       border-radius: 15px;
       cursor: pointer;
       transition: transform 0.4s, box-shadow 0.3s;
-      box-shadow: 0 12px 40px rgba(255, 140, 66, 0.5);
+      box-shadow: 0 12px 30px rgba(255, 140, 66, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .gift-box:hover {
@@ -96,12 +92,12 @@
     .gift-box .lid {
       position: absolute;
       width: 100%;
-      height: 50px;
+      height: 40%;
       background: #e66a00;
       top: 0;
       border-top-left-radius: 15px;
       border-top-right-radius: 15px;
-      transition: transform 0.8s;
+      transition: transform 0.6s;
       transform-origin: top center;
     }
 
@@ -113,9 +109,9 @@
       position: absolute;
       opacity: 0;
       transition: opacity 0.5s, transform 0.5s;
-      transform: translateY(-20px);
+      transform: translateY(-10px);
       color: #fff;
-      font-size: 1.5em;
+      font-size: 1.4em;
     }
 
     .gift-box.open .box-content {
@@ -124,9 +120,9 @@
     }
 
     footer {
-      margin-top: 20px;
+      margin-top: 15px;
       color: #888;
-      font-size: 0.8em;
+      font-size: 0.85em;
     }
 
     @keyframes fadeIn {
@@ -139,28 +135,6 @@
         transform: translateY(0);
       }
     }
-
-    /* Эффект блесток */
-    .sparkle {
-      position: absolute;
-      width: 8px;
-      height: 8px;
-      background: #ffd700;
-      border-radius: 50%;
-      animation: sparkle 1.5s ease-out forwards;
-      pointer-events: none;
-    }
-
-    @keyframes sparkle {
-      0% {
-        opacity: 1;
-        transform: scale(1);
-      }
-      100% {
-        opacity: 0;
-        transform: scale(0);
-      }
-    }
   </style>
 </head>
 <body>
@@ -171,11 +145,16 @@
     <button onclick="startExperience()">вперёд!</button>
   </div>
 
+  <!-- АУДИО -->
+  <audio id="bgMusic" loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-littleidea.mp3" type="audio/mp3">
+  </audio>
+
   <!-- ОСНОВНОЙ КОНТЕНТ -->
   <div class="container" id="mainContent">
-    <h2 class="fade-in">ты так много заботишься о других</h2>
-    <p class="fade-in">что я решил: тебе точно нужно что-то, что сделает твои будни немножко ярче и теплее</p>
-    <h2 class="fade-in">загляни в пункт выдачи boxberry. он в соседнем доме у клиники - тебя там кое-что ждёт</h2>
+    <h2>ты так много заботишься о других</h2>
+    <p>что я решил: тебе точно нужно что-то, что сделает твои будни немножко ярче и теплее</p>
+    <p>загляни в пункт выдачи boxberry. он в соседнем доме у клиники - тебя там кое-что ждёт</p>
 
     <!-- КОРОБКА -->
     <div class="gift-box" onclick="openGift(this)">
@@ -190,32 +169,16 @@
 
   <script>
     function startExperience() {
-      const startScreen = document.getElementById("startScreen");
-      startScreen.style.opacity = "0";
+      document.getElementById("startScreen").style.opacity = "0";
       setTimeout(() => {
-        startScreen.style.display = "none";
+        document.getElementById("startScreen").style.display = "none";
         document.getElementById("mainContent").style.display = "block";
-        document.querySelectorAll(".fade-in").forEach(el => {
-          el.style.opacity = "1";
-          el.style.transform = "translateY(0)";
-        });
-      }, 1000);
+        document.getElementById("bgMusic").play();
+      }, 800);
     }
 
     function openGift(box) {
       box.classList.add("open");
-      for (let i = 0; i < 50; i++) {
-        createSparkle(box);
-      }
-    }
-
-    function createSparkle(box) {
-      const sparkle = document.createElement("div");
-      sparkle.className = "sparkle";
-      sparkle.style.left = `${Math.random() * box.offsetWidth - 20}px`;
-      sparkle.style.top = `${Math.random() * box.offsetHeight - 20}px`;
-      box.appendChild(sparkle);
-      setTimeout(() => sparkle.remove(), 1500);
     }
   </script>
 </body>
