@@ -22,6 +22,7 @@
       align-items: center;
       justify-content: center;
       position: relative;
+      flex-direction: column;
     }
 
     #startScreen {
@@ -40,7 +41,7 @@
     }
 
     #startScreen h1 {
-      font-size: 1.8em;
+      font-size: 1.6em;
       color: #ff8c42;
       margin-bottom: 20px;
       font-weight: 600;
@@ -78,7 +79,7 @@
 
     h1 {
       color: #ff8c42;
-      font-size: 2em;
+      font-size: 1.8em;
       margin-bottom: 15px;
       font-weight: 600;
     }
@@ -91,8 +92,8 @@
     }
 
     .gift-box {
-      width: 250px;
-      height: 250px;
+      width: 200px;
+      height: 200px;
       background: #ff8c42;
       margin: 30px auto;
       position: relative;
@@ -104,6 +105,8 @@
       justify-content: center;
       align-items: center;
       overflow: hidden;
+      flex-direction: column;
+      align-items: center;
     }
 
     .gift-box:hover {
@@ -148,7 +151,7 @@
     }
 
     .gift-box.open .lid {
-      transform: rotateX(160deg);
+      transform: translateY(-50%);
     }
 
     .gift-box.open .box-content {
@@ -173,37 +176,37 @@
       }
     }
 
-    /* Падающие частицы */
-    .particles {
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      pointer-events: none;
-      z-index: 1;
-      animation: fall 5s infinite;
-    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 14px;
+        justify-content: flex-start;
+      }
 
-    .particle {
-      position: absolute;
-      top: -10px;
-      width: 12px;
-      height: 12px;
-      background: red;
-      border-radius: 50%;
-      animation: particle-fall 5s infinite;
-    }
+      .container {
+        padding: 20px;
+      }
 
-    @keyframes fall {
-      0% { top: -10px; }
-      100% { top: 100vh; }
-    }
+      .gift-box {
+        width: 150px;
+        height: 150px;
+      }
 
-    @keyframes particle-fall {
-      0% { transform: scale(0.5); opacity: 1; }
-      100% { transform: scale(1.5); opacity: 0; }
-    }
+      .gift-box .lid {
+        height: 40%;
+      }
 
+      h1 {
+        font-size: 1.5em;
+      }
+
+      p, h2 {
+        font-size: 1em;
+      }
+
+      footer {
+        font-size: 0.8em;
+      }
+    }
   </style>
 </head>
 <body>
@@ -240,15 +243,6 @@
     </div>
 
     <footer>Сделано с вниманием и заботой.</footer>
-  </div>
-
-  <!-- ПАДАЮЩИЕ ЧАСТИЦЫ -->
-  <div class="particles">
-    <!-- Создаём случайные частицы -->
-    <div class="particle" style="left: 20%; animation-delay: 0s;"></div>
-    <div class="particle" style="left: 40%; animation-delay: 1s;"></div>
-    <div class="particle" style="left: 60%; animation-delay: 2s;"></div>
-    <div class="particle" style="left: 80%; animation-delay: 3s;"></div>
   </div>
 
   <script>
