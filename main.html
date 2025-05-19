@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>маленький сюрприз</title>
+  <!-- Подключение шрифта Poppins -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     * {
@@ -92,9 +93,9 @@
     }
 
     .gift-box {
-      width: 220px;
-      height: 220px;
-      background: linear-gradient(to bottom, #ff8c42 0%, #e67300 100%);
+      width: 200px;
+      height: 200px;
+      background: #ff8c42;
       margin: 30px auto;
       position: relative;
       border-radius: 15px;
@@ -103,117 +104,110 @@
       box-shadow: 0 8px 30px rgba(255, 100, 0, 0.4);
       display: flex;
       justify-content: center;
-      align-items: flex-end;
+      align-items: center;
       overflow: hidden;
       flex-direction: column;
       transform-style: preserve-3d;
-      animation: pulseGlow 2s infinite ease-in-out;
-      border: 2px solid rgba(255, 180, 100, 0.7);
     }
 
     .gift-box:hover {
       transform: scale(1.05);
-      box-shadow: 0 12px 40px rgba(255, 120, 0, 0.5);
+      box-shadow: 0 12px 40px rgba(255, 100, 0, 0.5);
     }
 
     .lid {
       position: absolute;
       width: 100%;
-      height: 60px;
-      background: linear-gradient(to top, #e66a00 0%, #ff8c42 100%);
+      height: 50%;
+      background: #e66a00;
       top: 0;
       left: 0;
       border-top-left-radius: 15px;
       border-top-right-radius: 15px;
       transform-origin: top center;
-      transition: transform 0.8s ease-in-out;
+      transition: transform 0.8s ease;
       z-index: 2;
       backface-visibility: hidden;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     }
 
     .gift-box.open .lid {
-      animation: lidOpen 1s forwards;
-    }
-
-    @keyframes lidOpen {
-      0% { transform: rotateX(0); }
-      30% { transform: rotateX(-40deg); }
-      60% { transform: rotateX(-100deg); }
-      100% { transform: rotateX(-130deg) translateY(-10px); }
+      transform: rotateX(-120deg);
     }
 
     .box-content {
       position: absolute;
-      bottom: 25%;
       color: white;
-      font-size: 1.5em;
+      font-size: 1.3em;
       text-align: center;
       z-index: 1;
       opacity: 0;
+      transform: scale(0.9);
       transition: all 0.6s ease;
-      transform: translateY(20px);
     }
 
     .gift-box.open .box-content {
       opacity: 1;
-      transform: translateY(0);
+      transform: scale(1) translateY(-10px);
     }
 
     .code {
-      background: #fff7ed;
+      background: #ffe0c3;
       color: #b85e00;
-      padding: 18px 28px;
-      border-radius: 12px;
-      box-shadow: 0 0 20px rgba(255, 150, 50, 0.7);
-      font-size: 1.8em;
-      font-weight: 600;
-      letter-spacing: 3px;
-      animation: shine 2s infinite;
-    }
-
-    @keyframes shine {
-      0% { box-shadow: 0 0 10px rgba(255, 200, 100, 0.6); }
-      50% { box-shadow: 0 0 25px rgba(255, 200, 100, 1); }
-      100% { box-shadow: 0 0 10px rgba(255, 200, 100, 0.6); }
-    }
-
-    .confetti {
-      position: absolute;
-      width: 6px;
-      height: 12px;
-      background: red;
-      opacity: 0.8;
-      border-radius: 2px;
-      animation: confettiFall 2.5s linear forwards;
-    }
-
-    @keyframes confettiFall {
-      0% {
-        transform: translateY(0) rotate(0deg);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(600px) rotate(360deg);
-        opacity: 0;
-      }
+      padding: 15px 20px;
+      border-radius: 10px;
+      width: fit-content;
+      margin: 0 auto;
+      box-shadow: 0 0 15px rgba(255, 150, 50, 0.5);
+      font-size: 1.5em;
     }
 
     footer {
       margin-top: 20px;
       color: #888;
-      font-size: 0.6em;
+      font-size: 0.4em;
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(50px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
-    @keyframes pulseGlow {
-      0% { box-shadow: 0 0 15px rgba(255, 180, 100, 0.4); }
-      50% { box-shadow: 0 0 25px rgba(255, 180, 100, 0.9); }
-      100% { box-shadow: 0 0 15px rgba(255, 180, 100, 0.4); }
+    @media (max-width: 600px) {
+      body {
+        font-size: 14px;
+        justify-content: flex-start;
+      }
+
+      .container {
+        padding: 20px;
+      }
+
+      .gift-box {
+        width: 150px;
+        height: 150px;
+      }
+
+      .gift-box .lid {
+        height: 40%;
+      }
+
+      h1 {
+        font-size: 1.5em;
+      }
+
+      p, h2 {
+        font-size: 1em;
+      }
+
+      footer {
+        font-size: 0.8em;
+      }
     }
   </style>
 </head>
@@ -230,17 +224,14 @@
     <source src="https://www.bensound.com/bensound-music/bensound-littleidea.mp3" type="audio/mp3">
   </audio>
 
-  <audio id="openSound">
-    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_1fd7c4f0e3.mp3?filename=small-box-opening-68261.mp3" type="audio/mp3">
-  </audio>
-
   <!-- ОСНОВНОЙ КОНТЕНТ -->
   <div class="container" id="mainContent">
     <h2>ты так много заботишься о других,</h2>
+
     <p>и я решил: тебе точно нужно что-то, что сделает твои будни немножко мягче и теплее</p>
     <p>тебе нужно будет найти это...</p>
 
-    <h2><b>НО ГДЕ?</b></h2>
+    <h2><b>НО ГДЕ?<b></h2>
     <p>загляни в пункт выдачи boxberry. он в соседнем доме у клиники - тебя там кое-что ждёт )))</p>
 
     <!-- КОРОБКА -->
@@ -257,29 +248,13 @@
   <script>
     function startExperience() {
       document.getElementById("startScreen").style.display = "none";
+      const music = document.getElementById("bgMusic");
+      music.play();
       document.getElementById("mainContent").style.display = "block";
-      document.getElementById("bgMusic").play();
     }
 
     function openGift(box) {
-      if (!box.classList.contains("open")) {
-        box.classList.add("open");
-        document.getElementById("openSound").play();
-        launchConfetti(box);
-      }
-    }
-
-    function launchConfetti(container) {
-      for (let i = 0; i < 80; i++) {
-        const confetti = document.createElement("div");
-        confetti.classList.add("confetti");
-        confetti.style.left = (Math.random() * 220) + "px";
-        confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 60%)`;
-        confetti.style.animationDuration = (1.5 + Math.random() * 1.5) + "s";
-        confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
-        container.appendChild(confetti);
-        setTimeout(() => confetti.remove(), 3000);
-      }
+      box.classList.add("open");
     }
   </script>
 
