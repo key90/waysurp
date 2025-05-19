@@ -137,18 +137,10 @@
     }
 
     @keyframes lidOpen {
-      0% {
-        transform: rotateX(0);
-      }
-      30% {
-        transform: rotateX(-40deg);
-      }
-      60% {
-        transform: rotateX(-100deg);
-      }
-      100% {
-        transform: rotateX(-130deg) translateY(-10px);
-      }
+      0% { transform: rotateX(0); }
+      30% { transform: rotateX(-40deg); }
+      60% { transform: rotateX(-100deg); }
+      100% { transform: rotateX(-130deg) translateY(-10px); }
     }
 
     .box-content {
@@ -186,6 +178,27 @@
       100% { box-shadow: 0 0 10px rgba(255, 200, 100, 0.6); }
     }
 
+    .confetti {
+      position: absolute;
+      width: 6px;
+      height: 12px;
+      background: red;
+      opacity: 0.8;
+      border-radius: 2px;
+      animation: confettiFall 2.5s linear forwards;
+    }
+
+    @keyframes confettiFall {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(600px) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
     footer {
       margin-top: 20px;
       color: #888;
@@ -193,58 +206,14 @@
     }
 
     @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(50px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(50px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     @keyframes pulseGlow {
-      0% {
-        box-shadow: 0 0 15px rgba(255, 180, 100, 0.4);
-      }
-      50% {
-        box-shadow: 0 0 25px rgba(255, 180, 100, 0.9);
-      }
-      100% {
-        box-shadow: 0 0 15px rgba(255, 180, 100, 0.4);
-      }
-    }
-
-    @media (max-width: 600px) {
-      body {
-        font-size: 14px;
-        justify-content: flex-start;
-      }
-
-      .container {
-        padding: 20px;
-      }
-
-      .gift-box {
-        width: 150px;
-        height: 150px;
-      }
-
-      .gift-box .lid {
-        height: 40px;
-      }
-
-      h1 {
-        font-size: 1.5em;
-      }
-
-      p, h2 {
-        font-size: 1em;
-      }
-
-      footer {
-        font-size: 0.8em;
-      }
+      0% { box-shadow: 0 0 15px rgba(255, 180, 100, 0.4); }
+      50% { box-shadow: 0 0 25px rgba(255, 180, 100, 0.9); }
+      100% { box-shadow: 0 0 15px rgba(255, 180, 100, 0.4); }
     }
   </style>
 </head>
@@ -288,15 +257,28 @@
   <script>
     function startExperience() {
       document.getElementById("startScreen").style.display = "none";
-      const music = document.getElementById("bgMusic");
-      music.play();
       document.getElementById("mainContent").style.display = "block";
+      document.getElementById("bgMusic").play();
     }
 
     function openGift(box) {
       if (!box.classList.contains("open")) {
         box.classList.add("open");
         document.getElementById("openSound").play();
+        launchConfetti(box);
+      }
+    }
+
+    function launchConfetti(container) {
+      for (let i = 0; i < 80; i++) {
+        const confetti = document.createElement("div");
+        confetti.classList.add("confetti");
+        confetti.style.left = (Math.random() * 220) + "px";
+        confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 60%)`;
+        confetti.style.animationDuration = (1.5 + Math.random() * 1.5) + "s";
+        confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+        container.appendChild(confetti);
+        setTimeout(() => confetti.remove(), 3000);
       }
     }
   </script>
